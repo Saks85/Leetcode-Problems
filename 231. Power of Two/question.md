@@ -11,13 +11,13 @@ Example 1:
 ---
 Input: n = 1  
 Output: true  
-Explanation: 20 = 1  
+Explanation: 2^0 = 1  
 
 Example 2:
 ---
 Input: n = 16  
 Output: true  
-Explanation: 24 = 16  
+Explanation: 2^4 = 16  
 
 Example 3:
 ---
@@ -27,4 +27,4 @@ Output: false
 
 Constraints:
 ---
--231 <= n <= 231 - 1
+-2^31 <= n <= 2^31 - 1
