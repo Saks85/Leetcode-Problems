@@ -5,8 +5,7 @@ class Solution {
         arr[j]=temp;
     }
     public List<List<Integer>> swap_approach(int[] nums,int index, List<List<Integer>> ans){
-        //mark the element which have been used
-        //recursive mark all the elements in different orders to get the permutations
+        //swaps each element to get all the permutations.
         if(index==nums.length){
             List<Integer> ds= new ArrayList<>();
             for(int i=0; i<nums.length; i++){
