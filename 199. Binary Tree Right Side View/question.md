@@ -10,6 +10,8 @@ Example 1:
 Input: root = [1,2,3,null,5,null,4]  
 
 Output: [1,3,4]  
+<img width="496" height="255" alt="image" src="https://github.com/user-attachments/assets/b60e1d4d-ee1b-46c8-b872-e1f3357f9805" />
+
 
 
 Example 2:
