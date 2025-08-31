@@ -1,12 +1,4 @@
 class Solution {
-    class Pair {
-        int cur, parent;
-
-        public Pair(int c, int p) {
-            this.cur = c;
-            this.parent = p;
-        }
-    }
 
     public boolean isBipartite(int[][] graph) {
         if (graph.length==0 || graph.length==1) return true;
