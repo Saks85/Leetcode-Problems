@@ -1,4 +1,4 @@
-$ 1192. Critical Connections in a Network
+# 1192. Critical Connections in a Network
 Solved, Hard
 
 There are n servers numbered from 0 to n - 1 connected by undirected server-to-server connections forming a network where connections[i] = [ai, bi] represents a
