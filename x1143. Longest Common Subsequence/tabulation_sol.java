@@ -17,7 +17,7 @@ class Solution {
             }
         }
 
-        return f(n,m,s1,s2,dp);
+        return dp[n][m];
         
     }
 }
