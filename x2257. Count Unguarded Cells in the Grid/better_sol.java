@@ -1,51 +1,53 @@
 class Solution {
     public int countUnguarded(int m, int n, int[][] guards, int[][] walls) {
-        int[][] grid = new int[m][n];
-        boolean[][] guarded = new boolean[m][n];
+        byte[][] state = new byte[m][n]; // 0=empty,1=guard,2=wall,3=guarded
+        for (int[] g : guards) state[g[0]][g[1]] = 1;
+        for (int[] w : walls) state[w[0]][w[1]] = 2;
 
-        // Mark guards as 1, walls as 2
-        for (int[] g : guards) grid[g[0]][g[1]] = 1;
-        for (int[] w : walls) grid[w[0]][w[1]] = 2;
+        boolean[] rowGuard = new boolean[m], colGuard = new boolean[n];
+        for (int[] g : guards) {
+            rowGuard[g[0]] = true;
+            colGuard[g[1]] = true;
+        }
 
-        // Sweep rows left to right and right to left
+        // horizontal sweeps
         for (int i = 0; i < m; i++) {
-            boolean seenGuard = false;
+            if (!rowGuard[i]) continue;
+            boolean seen = false;
             for (int j = 0; j < n; j++) {
-                if (grid[i][j] == 2) seenGuard = false;  // wall blocks vision
-                else if (grid[i][j] == 1) seenGuard = true;  // guard sees next cells
-                else if (seenGuard) guarded[i][j] = true;  // mark as guarded
+                if (state[i][j] == 2) seen = false;
+                else if (state[i][j] == 1) seen = true;
+                else if (seen && state[i][j] == 0) state[i][j] = 3;
             }
-            seenGuard = false;
+            seen = false;
             for (int j = n - 1; j >= 0; j--) {
-                if (grid[i][j] == 2) seenGuard = false;
-                else if (grid[i][j] == 1) seenGuard = true;
-                else if (seenGuard) guarded[i][j] = true;
+                if (state[i][j] == 2) seen = false;
+                else if (state[i][j] == 1) seen = true;
+                else if (seen && state[i][j] == 0) state[i][j] = 3;
             }
         }
 
-        // Sweep columns top to bottom and bottom to top
+        // vertical sweeps
         for (int j = 0; j < n; j++) {
-            boolean seenGuard = false;
+            if (!colGuard[j]) continue;
+            boolean seen = false;
             for (int i = 0; i < m; i++) {
-                if (grid[i][j] == 2) seenGuard = false;
-                else if (grid[i][j] == 1) seenGuard = true;
-                else if (seenGuard) guarded[i][j] = true;
+                if (state[i][j] == 2) seen = false;
+                else if (state[i][j] == 1) seen = true;
+                else if (seen && state[i][j] == 0) state[i][j] = 3;
             }
-            seenGuard = false;
+            seen = false;
             for (int i = m - 1; i >= 0; i--) {
-                if (grid[i][j] == 2) seenGuard = false;
-                else if (grid[i][j] == 1) seenGuard = true;
-                else if (seenGuard) guarded[i][j] = true;
+                if (state[i][j] == 2) seen = false;
+                else if (state[i][j] == 1) seen = true;
+                else if (seen && state[i][j] == 0) state[i][j] = 3;
             }
         }
 
-        // Count unguarded cells
         int count = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j] == 0 && !guarded[i][j]) count++;
-            }
-        }
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                if (state[i][j] == 0) count++;
         return count;
     }
 }
